@@ -16,18 +16,25 @@ def read(fname):
     return io.open(os.path.join(os.path.dirname(__file__), fname), encoding='utf-8').read()
 
 
+tests_require = [
+    'mock',
+    'moto==0.4.31',
+    'pathlib2',
+    'responses',
+]
+
 setup(
     name='smart_open',
-    version='1.5.3',
+    version='1.6.0',
     description='Utils for streaming large files (S3, HDFS, gzip, bz2...)',
     long_description=read('README.rst'),
 
     packages=find_packages(),
     package_data={"smart_open.tests": ["test_data/*gz"]},
 
-    author=u'Radim Řehůřek',
+    author='Radim Rehurek',
     author_email='me@radimrehurek.com',
-    maintainer=u'Radim Řehůřek',
+    maintainer='Radim Rehurek',
     maintainer_email='me@radimrehurek.com',
 
     url='https://github.com/piskvorky/smart_open',
@@ -42,14 +49,12 @@ setup(
         'boto >= 2.32',
         'bz2file',
         'requests',
+        'boto3'
     ],
-
-    tests_require=[
-        'mock',
-        'moto==0.4.31',
-        'responses',
-    ],
-
+    tests_require=tests_require,
+    extras_require={
+        'test': tests_require,
+    },
 
     test_suite="smart_open.tests",
 
